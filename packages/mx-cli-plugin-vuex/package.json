@@ -1,7 +1,6 @@
 {
   "name": "mx-cli-plugin-vuex",
   "version": "0.0.1",
-  "private": true,
   "description": "> TODO: description",
   "author": "Arya <1401495391@qq.com>",
   "homepage": "https://github.com/missXing/mx-cli",

@@ -1,0 +1,46 @@
+{
+  "name": "mx-cli-service",
+  "version": "0.0.2",
+  "description": "> TODO: description",
+  "author": "Arya <1401495391@qq.com>",
+  "homepage": "https://github.com/missXing/mx-cli",
+  "license": "ISC",
+  "bin": {
+    "mx-cli-service": "bin/mx-cli-service.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/missXing/mx-cli.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/mx-cli-service.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/missXing/mx-cli/issues"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.2",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.1",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^4.2.1",
+    "webpackbar": "^4.0.0"
+  }
+}

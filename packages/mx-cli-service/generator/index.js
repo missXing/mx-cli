@@ -1,10 +1,16 @@
-module.exports = (generator, options = {}) => {
+module.exports = (generator) => {
+    generator.render('./template')
+
     generator.extendPackage({
         scripts: {
-            dev: 'webpack-dev-server --config ./build/dev.config.js',
-            build: 'webpack --config ./build/pro.config.js',
+            serve: 'mx-cli-service serve',
+            build: 'mx-cli-service build',
+        },
+        dependencies: {
+            vue: '^2.6.12',
         },
         devDependencies: {
+            'vue-template-compiler': '^2.6.12',
             'clean-webpack-plugin': '^3.0.0',
             'css-loader': '^5.0.2',
             'file-loader': '^6.2.0',
@@ -20,8 +26,11 @@ module.exports = (generator, options = {}) => {
         },
     })
 
-    generator.render('./template', {
-        hasBabel: options.features.includes('babel'),
-        lintOnSave: options.lintOn && options.lintOn.includes('save'),
+    generator.extendPackage({
+        browserslist: [
+            '> 1%',
+            'last 2 versions',
+            'not dead',
+        ],
     })
 }

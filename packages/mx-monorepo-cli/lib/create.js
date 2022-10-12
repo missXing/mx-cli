@@ -10,6 +10,7 @@ const { savePreset, rcPath } = require('./utils/options')
 const { log } = require('./utils/logger')
 const { saveOptions } = require('./utils/options')
 const PackageManager = require('./PackageManager')
+const writeFileTree = require('./utils/writeFileTree')
 
 async function create(name) {
     const targetDir = path.join(process.cwd(), name)
@@ -47,7 +48,6 @@ async function create(name) {
 
     // 弹出交互提示语并获取用户的选择
     const answers = await inquirer.prompt(creator.getFinalPrompts())
-
     if (answers.preset !== '__manual__') {
         const preset = creator.getPresets()[answers.preset]
         Object.keys(preset).forEach(key => {
@@ -77,13 +77,36 @@ async function create(name) {
     }
     
     const generator = new Generator(pkg, targetDir)
-    // 填入 vue webpack 必选项，无需用户选择
-    answers.features.unshift('vue', 'webpack')
+    // 填入 cli-service 必选项，无需用户选择
+    answers.features.unshift('service')
+    // 这里有问题 先注释掉
+    // answers.features.forEach(feature => {
+    //     if (feature !== 'service') {
+    //         pkg.devDependencies[`mx-cli-plugin-${feature}`] = '~0.0.1'
+    //     } else {
+    //         pkg.devDependencies['mx-cli-service'] = '~0.0.1'
+    //     }
+    // })
+
+    // 这才是正确的
+    answers.features.forEach(feature => {
+        if (feature === 'service') {
+            pkg.devDependencies['mx-cli-service'] = '^0.0.2'
+        }
+    })
+
+    await writeFileTree(targetDir, {
+        'package.json': JSON.stringify(pkg, null, 2),
+    })
 
     // 根据用户选择的选项加载相应的模块，在 package.json 写入对应的依赖项
     // 并且将对应的 template 模块渲染
     answers.features.forEach(feature => {
-        require(`mx-cli-plugin-${feature}/generator`)(generator, answers)
+        if (feature !== 'service') {
+            require(`mx-cli-plugin-${feature}/generator`)(generator, answers)
+        } else {
+            require(`mx-cli-service/generator`)(generator, answers)
+        }
     })
 
     await generator.generate()
@@ -92,7 +115,7 @@ async function create(name) {
     await pm.install()
     log('\n依赖下载完成! 执行下列命令开始开发：\n')
     log(`cd ${name}`)
-    log(`${pm.bin === 'npm'? 'npm run' : 'yarn'} dev`)
+    log(`${pm.bin === 'npm'? 'npm run' : 'yarn'} serve`)
 }
 
 function getPromptModules() {

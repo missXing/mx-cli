@@ -1,12 +1,10 @@
 {
   "name": "mx-cli-plugin-babel",
   "version": "0.0.1",
-  "private": true,
   "description": "> TODO: description",
   "author": "Arya <1401495391@qq.com>",
   "homepage": "https://github.com/missXing/mx-cli#readme",
   "license": "ISC",
-  "main": "lib/mx-cli-plugin-babel.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
