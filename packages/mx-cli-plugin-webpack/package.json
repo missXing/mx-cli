@@ -1,0 +1,30 @@
+{
+  "name": "mx-cli-plugin-webpack",
+  "version": "0.0.1",
+  "private": true,
+  "description": "> TODO: description",
+  "author": "Arya <1401495391@qq.com>",
+  "homepage": "https://github.com/missXing/mx-cli",
+  "license": "ISC",
+  "main": "lib/mx-cli-plugin-webpack.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://mirrors.cloud.tencent.com/npm/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/missXing/mx-cli.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/mx-cli-plugin-webpack.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/missXing/mx-cli/issues"
+  }
+}
